@@ -1,61 +1,64 @@
-// Per il desktop troviamo gli elementi e leggiamo la larghezza
-const navigationButton = document.querySelector('.navigation-toggle');
-const navigationLabel = document.querySelector('.navigation-label');
-const navigationPanel = document.querySelector('.navigation-panel');
-const desktopMedia = window.matchMedia('(min-width: 63.25rem)');
-const supportsNavigation = 'popover' in HTMLElement.prototype &&
-  CSS.supports('top', 'anchor(bottom)') &&
-  CSS.supports('width', 'anchor-size(width)');
+document.addEventListener("DOMContentLoaded", () => {
+  const navPanel = document.getElementById("navigation-panel");
+  const navToggle = document.querySelector(".navigation-toggle");
 
-// Scegliamo la modalità di navigazione al caricamento (il popover funziona già in HTML)
-function updateNavigationLabel() {
-  const text = navigationPanel.matches(':popover-open') ? 'Chiudi menu' : 'Apri menu';
-  navigationButton.setAttribute('aria-label', text);
-  navigationLabel.textContent = text;
-}
-function updateNavigationLayout() {
-  if (desktopMedia.matches) { // Siamo su desktop, disattiva il popover!
-    navigationButton.removeAttribute('popovertarget');
-    navigationPanel.removeAttribute('popover');
-    navigationButton.hidden = true;
-  } else { // Non siamo su desktop, riattiva il popover!
-    navigationPanel.setAttribute('popover', 'auto');
-    navigationButton.setAttribute('popovertarget', navigationPanel.id);
-    navigationButton.hidden = false;
+  if (!navPanel) return;
+
+  // 1. Gestione responsive del Popover (Menu dei Capitoli)
+  // Utilizza MatchMedia per applicare o rimuovere l'attributo `popover` in base alla larghezza dello schermo
+  const mediaQuery = window.matchMedia("(min-width: 63.25rem)");
+
+  function handleBreakpointChange(e) {
+    if (e.matches) {
+      // Schermi grandi: Rimuove l'attributo popover per mostrare la nav inline
+      if (navPanel.hasAttribute("popover")) {
+        navPanel.removeAttribute("popover");
+      }
+    } else {
+      // Schermi piccoli/medio-piccoli: Attiva la modalità popover
+      if (!navPanel.hasAttribute("popover")) {
+        navPanel.setAttribute("popover", "auto");
+      }
+    }
   }
-  updateNavigationLabel();
-}
-if (supportsNavigation) {
-  navigationPanel.addEventListener('toggle', updateNavigationLabel);
-  updateNavigationLayout();
-} else {
-  // Qui si può eventualmente inserire un ripiego per i browser privi delle funzionalità richieste.
-  navigationButton.removeAttribute('popovertarget');
-  navigationPanel.removeAttribute('popover');
-  navigationButton.hidden = true;
-}
 
-// Chiudiamo il popover se clicchiamo fuori (ad eccezione di alcuni casi) e lasciamo al link HTML la navigazione al capitolo
-navigationPanel.addEventListener('click', function (event) {
-  const link = event.target.closest('a[href^="#"]');
-  if (!link || event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-  const target = document.getElementById(link.hash.slice(1));
-  if (!target) return;
-  if (supportsNavigation && navigationPanel.matches(':popover-open')) navigationPanel.hidePopover();
-  // Il link continua ad aggiornare il frammento e a scorrere con il comportamento HTML.
-});
-document.querySelector('.skip-link').addEventListener('click', function () {
-  document.querySelector('#top').focus();
-});
+  // Inizializzazione al caricamento
+  handleBreakpointChange(mediaQuery);
+  mediaQuery.addEventListener("change", handleBreakpointChange);
 
-// Bonus accessibilità: se cambia il breakpoint, manteniamo il focus dove serve
-desktopMedia.addEventListener('change', function () {
-  if (!supportsNavigation) return;
-  const focused = document.activeElement;
-  const focusInNavigation = navigationPanel.contains(focused);
-  const focusOnButton = focused === navigationButton;
-  updateNavigationLayout();
-  if (desktopMedia.matches && focusInNavigation) focused.focus();
-  else if (desktopMedia.matches && focusOnButton) navigationPanel.querySelector('a').focus();
-  else if (!desktopMedia.matches && focusInNavigation) navigationButton.focus();
+  // 2. Chiusura automatica del menu al click su un link (su dispositivi mobili)
+  const navLinks = navPanel.querySelectorAll("a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (navPanel.hasAttribute("popover") && navPanel.hidePopover) {
+        try {
+          navPanel.hidePopover();
+        } catch (err) {
+          // Ignora se il popover era già chiuso
+        }
+      }
+    });
+  });
+
+  // 3. Smooth Scrolling per i link di ancoraggio
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      const targetId = anchor.getAttribute("href");
+      if (targetId === "#") return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        // Imposta il focus per l'accessibilità (A11y)
+        targetElement.setAttribute("tabindex", "-1");
+        targetElement.focus({ preventScroll: true });
+      }
+    });
+  });
 });
