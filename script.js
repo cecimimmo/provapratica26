@@ -1,60 +1,61 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const navPanel = document.getElementById("navigation-panel");
+// Per il desktop troviamo gli elementi e leggiamo la larghezza
+const navigationButton = document.querySelector('.navigation-toggle');
+const navigationLabel = document.querySelector('.navigation-label');
+const navigationPanel = document.querySelector('.navigation-panel');
+const desktopMedia = window.matchMedia('(min-width: 1000px)');
+const supportsNavigation = 'popover' in HTMLElement.prototype &&
+  CSS.supports('top', 'anchor(bottom)') &&
+  CSS.supports('width', 'anchor-size(width)');
 
-  if (!navPanel) return;
-
-  // Gestione del menu Popover responsive
-  const mediaQuery = window.matchMedia("(min-width: 63.25rem)");
-
-  function handleBreakpointChange(e) {
-    if (e.matches) {
-      if (navPanel.hasAttribute("popover")) {
-        navPanel.removeAttribute("popover");
-      }
-    } else {
-      if (!navPanel.hasAttribute("popover")) {
-        navPanel.setAttribute("popover", "auto");
-      }
-    }
+// Scegliamo la modalità di navigazione al caricamento (il popover funziona già in HTML)
+function updateNavigationLabel() {
+  const text = navigationPanel.matches(':popover-open') ? 'Chiudi menu' : 'Apri menu';
+  navigationButton.setAttribute('aria-label', text);
+  navigationLabel.textContent = text;
+}
+function updateNavigationLayout() {
+  if (desktopMedia.matches) { // Siamo su desktop, disattiva il popover!
+    navigationButton.removeAttribute('popovertarget');
+    navigationPanel.removeAttribute('popover');
+    navigationButton.hidden = true;
+  } else { // Non siamo su desktop, riattiva il popover!
+    navigationPanel.setAttribute('popover', 'auto');
+    navigationButton.setAttribute('popovertarget', navigationPanel.id);
+    navigationButton.hidden = false;
   }
+  updateNavigationLabel();
+}
+if (supportsNavigation) {
+  navigationPanel.addEventListener('toggle', updateNavigationLabel);
+  updateNavigationLayout();
+} else {
+  // Qui si può eventualmente inserire un ripiego per i browser privi delle funzionalità richieste.
+  navigationButton.removeAttribute('popovertarget');
+  navigationPanel.removeAttribute('popover');
+  navigationButton.hidden = true;
+}
 
-  handleBreakpointChange(mediaQuery);
-  mediaQuery.addEventListener("change", handleBreakpointChange);
+// Chiudiamo il popover se clicchiamo fuori (ad eccezione di alcuni casi) e lasciamo al link HTML la navigazione al capitolo
+navigationPanel.addEventListener('click', function (event) {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link || event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  const target = document.getElementById(link.hash.slice(1));
+  if (!target) return;
+  if (supportsNavigation && navigationPanel.matches(':popover-open')) navigationPanel.hidePopover();
+  // Il link continua ad aggiornare il frammento e a scorrere con il comportamento HTML.
+});
+document.querySelector('.skip-link').addEventListener('click', function () {
+  document.querySelector('#top').focus();
+});
 
-  // Chiusura del menu al click sui link
-  const navLinks = navPanel.querySelectorAll("a");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (navPanel.hasAttribute("popover") && navPanel.hidePopover) {
-        try {
-          navPanel.hidePopover();
-        } catch (err) {
-          // Gestione fallback per browser datati
-        }
-      }
-    });
-  });
-
-  // Smooth scroll per tutti i link interni (compresi #concept e Torna all'inizio)
-  const anchorLinks = document.querySelectorAll('a[href^="#"]');
-  anchorLinks.forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      const targetId = anchor.getAttribute("href");
-      if (targetId === "#") return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-        // Gestione del focus per l'accessibilità
-        targetElement.setAttribute("tabindex", "-1");
-        targetElement.focus({ preventScroll: true });
-      }
-    });
-  });
+// Bonus accessibilità: se cambia il breakpoint, manteniamo il focus dove serve
+desktopMedia.addEventListener('change', function () {
+  if (!supportsNavigation) return;
+  const focused = document.activeElement;
+  const focusInNavigation = navigationPanel.contains(focused);
+  const focusOnButton = focused === navigationButton;
+  updateNavigationLayout();
+  if (desktopMedia.matches && focusInNavigation) focused.focus();
+  else if (desktopMedia.matches && focusOnButton) navigationPanel.querySelector('a').focus();
+  else if (!desktopMedia.matches && focusInNavigation) navigationButton.focus();
 });
