@@ -59,3 +59,44 @@ desktopMedia.addEventListener('change', function () {
   else if (desktopMedia.matches && focusOnButton) navigationPanel.querySelector('a').focus();
   else if (!desktopMedia.matches && focusInNavigation) navigationButton.focus();
 });
+// ==========================================================================
+// COMPONENTE CASE STUDY / BREAKDOWN TABS
+// ==========================================================================
+const breakdownContainer = document.querySelector('.breakdownTabs');
+
+if (breakdownContainer) {
+  const breakdownItems = breakdownContainer.querySelectorAll('.breakdownTabs-item');
+  const breakdownButtons = breakdownContainer.querySelectorAll('.breakdownTabs-button');
+  const breakdownImages = breakdownContainer.querySelectorAll('.breakdownTabs-image');
+
+  // 1. Aggiungiamo la classe che attiva il comportamento JS/Accordion
+  breakdownContainer.classList.add('breakdownTabs-ready');
+
+  // 2. Funzione per scegliere la voce attiva
+  function selectBreakdownTab(index) {
+    // Aggiorna lo stato delle voci (linea + visibilità descrizione)
+    breakdownItems.forEach((item, i) => {
+      if (i === index) {
+        item.classList.add('is-selected');
+      } else {
+        item.classList.remove('is-selected');
+      }
+    });
+
+    // Aggiorna la visibilità delle immagini corrispondenti
+    breakdownImages.forEach((img, i) => {
+      if (i === index) {
+        img.removeAttribute('hidden');
+      } else {
+        img.setAttribute('hidden', '');
+      }
+    });
+  }
+
+  // 3. Collega l'evento click a ciascun pulsante
+  breakdownButtons.forEach((button, index) => {
+    button.addEventListener('click', function () {
+      selectBreakdownTab(index);
+    });
+  });
+}

@@ -332,69 +332,75 @@
           </p>
         </div>
 
-        <!-- Box Immagine Centrale -->
-        <div class="casestudy-image-wrapper">
-          <img class="casestudy-image" src="assets/images/immagine segnaposto.webp" alt="Studiare il sistema - Case Study">
-        </div>
+        <!-- COMPONENTE CASE STUDY / BREAKDOWN TABS -->
+        <div class="breakdownTabs">
 
-        <!-- Griglia a 3 Colonne -->
-        <div class="casestudy-grid">
-          
-          <!-- Colonna 1 (Attiva / Selezionata) -->
-          <div class="casestudy-card active-card">
-            <div class="card-icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M6.17004 1.85156C7.45867 1.85168 8.5937 2.51003 9.25696 3.50879C9.92016 2.51007 11.0552 1.85172 12.3439 1.85156H18.5167C18.8574 1.85174 19.1339 2.12803 19.1339 2.46875V14.8643C19.1339 15.0287 19.0679 15.1869 18.9513 15.3027C18.8347 15.4185 18.6761 15.4826 18.5118 15.4814L12.1906 15.4385C11.53 15.434 10.8949 15.695 10.4279 16.1621L9.69446 16.8955C9.4534 17.1363 9.06236 17.1365 8.82141 16.8955L8.0802 16.1533C7.61721 15.6903 6.98888 15.4297 6.33411 15.4297H0.00012207C-0.340706 15.4296 -0.617065 15.1533 -0.617065 14.8125V2.46875C-0.617017 2.12795 -0.340676 1.85162 0.00012207 1.85156H6.17004ZM12.3439 3.08594C10.9807 3.08619 9.87522 4.19143 9.87512 5.55469V15.0039C10.5325 14.4835 11.3515 14.1985 12.1984 14.2041L17.8995 14.2432V3.08594H12.3439ZM0.61731 14.1953H6.33411C7.17608 14.1953 7.98845 14.4826 8.64075 15.002L8.63879 5.55273C8.63762 4.19019 7.53255 3.08612 6.17004 3.08594H0.61731V14.1953Z" fill="#08872B"/>
-</svg>
-
-            </div>
-            <h3 class="card-title">Studiare il sistema</h3>
-            <p class="card-desc">
-              Sono partito dalla documentazione e dalle pagine GitHub: tipografia, colori, spazi e comportamenti formano un insieme di decisioni. Ho usato Primer Brand come vocabolario per costruire la mia pagina.
-            </p>
-            <a href="#" class="card-link">Esplora Primer Brand &rsaquo;</a>
+          <!-- Gruppo Immagini (Una per ciascuna voce) -->
+          <div class="breakdownTabs-images">
+            <img id="casestudy-img-1" class="breakdownTabs-image" src="assets/images/immagine segnaposto.webp" alt="Studiare il sistema - Case Study">
+            <img id="casestudy-img-2" class="breakdownTabs-image" src="assets/images/immagine segnaposto2.svg" alt="Comporre la pagina - Case Study" hidden>
+            <img id="casestudy-img-3" class="breakdownTabs-image" src="assets/images/immagine segnaposto3.svg" alt="Verificare il risultato - Case Study" hidden>
           </div>
 
-          <!-- Colonna 2 (Inattiva) -->
-          <div class="casestudy-card">
-            <div class="card-icon">
-             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M17.2822 1.02832C18.191 1.02853 18.9277 1.76594 18.9277 2.6748V15.8418C18.9276 16.7506 18.191 17.4871 17.2822 17.4873H8.22949C7.32055 17.4873 6.58408 16.7507 6.58398 15.8418V2.6748C6.58398 1.76581 7.3205 1.02832 8.22949 1.02832H17.2822ZM8.22949 2.2627C8.00224 2.2627 7.81836 2.44756 7.81836 2.6748V15.8418C7.81845 16.069 8.0023 16.2529 8.22949 16.2529H17.2822C17.5092 16.2527 17.6933 16.0688 17.6934 15.8418V2.6748C17.6934 2.44769 17.5093 2.26291 17.2822 2.2627H8.22949ZM4.25 2.53418C4.55474 2.38181 4.92555 2.505 5.07812 2.80957C5.23048 3.11428 5.10724 3.48509 4.80273 3.6377C4.61543 3.73135 4.5597 3.7832 4.54297 3.80371C4.53924 3.80831 4.538 3.81055 4.53613 3.81641C4.53338 3.82508 4.52637 3.85225 4.52637 3.90918V14.6074C4.52638 14.6635 4.53332 14.6902 4.53613 14.6992C4.53802 14.7052 4.53927 14.7073 4.54297 14.7119C4.55947 14.7323 4.61469 14.7839 4.80273 14.8779C5.1074 15.0305 5.23049 15.4013 5.07812 15.7061C4.92568 16.0109 4.55489 16.1349 4.25 15.9824C4.02666 15.8707 3.77317 15.7234 3.58398 15.4902C3.37448 15.2319 3.29203 14.9312 3.29199 14.6074V3.90918C3.29199 3.58538 3.37447 3.28471 3.58398 3.02637C3.77314 2.79314 4.02662 2.64588 4.25 2.53418ZM0.925781 3.78613C1.2208 3.61568 1.59793 3.71675 1.76855 4.01172C1.93904 4.30663 1.83865 4.68373 1.54395 4.85449C1.42076 4.92575 1.33243 4.99547 1.28027 5.05664C1.23467 5.1102 1.23437 5.13478 1.23438 5.14355V13.373C1.23438 13.382 1.2349 13.4067 1.28027 13.46C1.33243 13.5211 1.42077 13.5899 1.54395 13.6611C1.83889 13.8319 1.93921 14.2099 1.76855 14.5049C1.59792 14.7997 1.22073 14.9008 0.925781 14.7305C0.600865 14.5425 0.000129725 14.1192 0 13.373V5.14355C0 4.39723 0.600829 3.97411 0.925781 3.78613Z" fill="#08872B"/>
-</svg>
+          <!-- Lista delle Voci -->
+          <ul class="breakdownTabs-list">
+            
+            <!-- Voce 1 (Selezionata di default) -->
+            <li class="breakdownTabs-item is-selected">
+              <button type="button" class="breakdownTabs-button">
+                <span class="breakdownTabs-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.17004 1.85156C7.45867 1.85168 8.5937 2.51003 9.25696 3.50879C9.92016 2.51007 11.0552 1.85172 12.3439 1.85156H18.5167C18.8574 1.85174 19.1339 2.12803 19.1339 2.46875V14.8643C19.1339 15.0287 19.0679 15.1869 18.9513 15.3027C18.8347 15.4185 18.6761 15.4826 18.5118 15.4814L12.1906 15.4385C11.53 15.434 10.8949 15.695 10.4279 16.1621L9.69446 16.8955C9.4534 17.1363 9.06236 17.1365 8.82141 16.8955L8.0802 16.1533C7.61721 15.6903 6.98888 15.4297 6.33411 15.4297H0.00012207C-0.340706 15.4296 -0.617065 15.1533 -0.617065 14.8125V2.46875C-0.617017 2.12795 -0.340676 1.85162 0.00012207 1.85156H6.17004ZM12.3439 3.08594C10.9807 3.08619 9.87522 4.19143 9.87512 5.55469V15.0039C10.5325 14.4835 11.3515 14.1985 12.1984 14.2041L17.8995 14.2432V3.08594H12.3439ZM0.61731 14.1953H6.33411C7.17608 14.1953 7.98845 14.4826 8.64075 15.002L8.63879 5.55273C8.63762 4.19019 7.53255 3.08612 6.17004 3.08594H0.61731V14.1953Z" fill="#08872B"/>
+                  </svg>
+                </span>
+                <span class="breakdownTabs-title">Studiare il sistema</span>
+              </button>
+              <div class="breakdownTabs-content">
+                <p class="breakdownTabs-desc">
+                  Sono partito dalla documentazione e dalle pagine GitHub: tipografia, colori, spazi e comportamenti formano un insieme di decisioni. Ho usato Primer Brand come vocabolario per costruire la mia pagina.
+                </p>
+              </div>
+            </li>
 
-            </div>
-            <h3 class="card-title">Comporre la pagina</h3>
-            <p class="card-desc">
-              Ho selezionato gli elaborati e dato a ogni contenuto una forma: Pillar per i livelli di lettura, Tabs per le viste, Testimonial per una riflessione. Gerarchie e spazi collegano i capitoli; sul mobile la composizione cambia disposizione.
-            </p>
-            <a href="#" class="card-link">Rileggi le scelte nella pagina &rsaquo;</a>
-          </div>
+            <!-- Voce 2 -->
+            <li class="breakdownTabs-item">
+              <button type="button" class="breakdownTabs-button">
+                <span class="breakdownTabs-icon">
+                  <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.2822 1.02832C18.191 1.02853 18.9277 1.76594 18.9277 2.6748V15.8418C18.9276 16.7506 18.191 17.4871 17.2822 17.4873H8.22949C7.32055 17.4873 6.58408 16.7507 6.58398 15.8418V2.6748C6.58398 1.76581 7.3205 1.02832 8.22949 1.02832H17.2822ZM8.22949 2.2627C8.00224 2.2627 7.81836 2.44756 7.81836 2.6748V15.8418C7.81845 16.069 8.0023 16.2529 8.22949 16.2529H17.2822C17.5092 16.2527 17.6933 16.0688 17.6934 15.8418V2.6748C17.6934 2.44769 17.5093 2.26291 17.2822 2.2627H8.22949ZM4.25 2.53418C4.55474 2.38181 4.92555 2.505 5.07812 2.80957C5.23048 3.11428 5.10724 3.48509 4.80273 3.6377C4.61543 3.73135 4.5597 3.7832 4.54297 3.80371C4.53924 3.80831 4.538 3.81055 4.53613 3.81641C4.53338 3.82508 4.52637 3.85225 4.52637 3.90918V14.6074C4.52638 14.6635 4.53332 14.6902 4.53613 14.6992C4.53802 14.7052 4.53927 14.7073 4.54297 14.7119C4.55947 14.7323 4.61469 14.7839 4.80273 14.8779C5.1074 15.0305 5.23049 15.4013 5.07812 15.7061C4.92568 16.0109 4.55489 16.1349 4.25 15.9824C4.02666 15.8707 3.77317 15.7234 3.58398 15.4902C3.37448 15.2319 3.29203 14.9312 3.29199 14.6074V3.90918C3.29199 3.58538 3.37447 3.28471 3.58398 3.02637C3.77314 2.79314 4.02662 2.64588 4.25 2.53418ZM0.925781 3.78613C1.2208 3.61568 1.59793 3.71675 1.76855 4.01172C1.93904 4.30663 1.83865 4.68373 1.54395 4.85449C1.42076 4.92575 1.33243 4.99547 1.28027 5.05664C1.23467 5.1102 1.23437 5.13478 1.23438 5.14355V13.373C1.23438 13.382 1.2349 13.4067 1.28027 13.46C1.33243 13.5211 1.42077 13.5899 1.54395 13.6611C1.83889 13.8319 1.93921 14.2099 1.76855 14.5049C1.59792 14.7997 1.22073 14.9008 0.925781 14.7305C0.600865 14.5425 0.000129725 14.1192 0 13.373V5.14355C0 4.39723 0.600829 3.97411 0.925781 3.78613Z" fill="#08872B"/>
+                  </svg>
+                </span>
+                <span class="breakdownTabs-title">Comporre la pagina</span>
+              </button>
+              <div class="breakdownTabs-content">
+                <p class="breakdownTabs-desc">
+                  Ho selezionato gli elaborati e dato a ogni contenuto una forma: Pillar per i livelli di lettura, Tabs per le viste, Testimonial per una riflessione. Gerarchie e spazi collegano i capitoli; sul mobile la composizione cambia disposizione.
+                </p>
+              </div>
+            </li>
 
-          <!-- Colonna 3 (Inattiva) -->
-          <div class="casestudy-card">
-            <div class="card-icon">
-             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.73535 3.47266C5.97634 3.23167 6.36735 3.23176 6.6084 3.47266C6.84943 3.71369 6.84943 4.10467 6.6084 4.3457L1.69629 9.25781L6.6084 14.1709C6.84943 14.4119 6.84943 14.8029 6.6084 15.0439C6.36734 15.2847 5.9763 15.2849 5.73535 15.0439L0.386719 9.69434C0.145818 9.45329 0.145729 9.06228 0.386719 8.82129L5.73535 3.47266ZM11.9082 3.47266C12.1492 3.23186 12.5393 3.2319 12.7803 3.47266L18.1299 8.82129C18.3709 9.06227 18.3708 9.45329 18.1299 9.69434L12.7803 15.0439C12.5393 15.2846 12.1491 15.2846 11.9082 15.0439C11.6672 14.8029 11.6672 14.4119 11.9082 14.1709L16.8203 9.25781L11.9082 4.3457C11.6672 4.10467 11.6672 3.71369 11.9082 3.47266Z" fill="#08872B"/>
-</svg>
+            <!-- Voce 3 -->
+            <li class="breakdownTabs-item">
+              <button type="button" class="breakdownTabs-button">
+                <span class="breakdownTabs-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.73535 3.47266C5.97634 3.23167 6.36735 3.23176 6.6084 3.47266C6.84943 3.71369 6.84943 4.10467 6.6084 4.3457L1.69629 9.25781L6.6084 14.1709C6.84943 14.4119 6.84943 14.8029 6.6084 15.0439C6.36734 15.2847 5.9763 15.2849 5.73535 15.0439L0.386719 9.69434C0.145818 9.45329 0.145729 9.06228 0.386719 8.82129L5.73535 3.47266ZM11.9082 3.47266C12.1492 3.23186 12.5393 3.2319 12.7803 3.47266L18.1299 8.82129C18.3709 9.06227 18.3708 9.45329 18.1299 9.69434L12.7803 15.0439C12.5393 15.2846 12.1491 15.2846 11.9082 15.0439C11.6672 14.8029 11.6672 14.4119 11.9082 14.1709L16.8203 9.25781L11.9082 4.3457C11.6672 4.10467 11.6672 3.71369 11.9082 3.47266Z" fill="#08872B"/>
+                  </svg>
+                </span>
+                <span class="breakdownTabs-title">Verificare il risultato</span>
+              </button>
+              <div class="breakdownTabs-content">
+                <p class="breakdownTabs-desc">
+                  Il lavoro continua nel browser: controllo la leggibilità, i collegamenti e i controlli da tastiera a larghezze diverse. La prova pratica richiede anche di saper spiegare e modificare il codice, mantenere Figma e sito coerenti e pubblicare il lavoro con GitHub Pages.
+                </p>
+              </div>
+            </li>
 
-            </div>
-            <h3 class="card-title">Verificare il risultato</h3>
-            <p class="card-desc">
-              Il lavoro continua nel browser: controllo la leggibilità, i collegamenti e i controlli da tastiera a larghezze diverse. La prova pratica richiede anche di saper spiegare e modificare il codice, mantenere Figma e sito coerenti e pubblicare il lavoro con GitHub Pages.
-            </p>
-            <a href="#" class="card-link">Scopri GitHub Pages &rsaquo;</a>
-          </div>
-
+          </ul>
         </div>
 
       </div>
     </section>
-    <!-- SEZIONE NOTA INFORMATIVA IN ALTO -->
-    <div class="disclaimer-note container">
-      <p>
-        Esempio per la prova pratica ITS Web Design e Strategie Digitali 26/27. Questa pagina usa i componenti React di Primer Brand; la consegna degli studenti prevede HTML, CSS e JavaScript vanilla. Le tre immagini di questa sezione sono segnaposto.
-      </p>
-    </div>
 
     <!-- CALL TO ACTION (CTA) SECTION -->
     <section class="cta-section">
