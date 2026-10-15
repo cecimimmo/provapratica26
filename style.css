@@ -282,7 +282,7 @@ body {
 .concept-lead {
     font-size: 15px;
     line-height: 1.6;
-    color: #888888;
+    color: #595959;
     margin-bottom: 32px;
     max-width: 640px;
 }
@@ -337,7 +337,7 @@ body {
 .sidebar-list a {
     text-decoration: none;
     font-size: 13.5px;
-    color: #777777;
+    color: #595959;
     transition: color 0.2s ease;
 }
 
@@ -878,7 +878,7 @@ body {
 .sitemap-text {
     font-size: 14.5px;
     line-height: 1.6;
-    color: #888888;
+    color: #595959;
     margin-bottom: 28px;
 }
 
@@ -928,6 +928,31 @@ body {
 @media (max-width: 768px) {
     .sitemap-header {
         padding: 40px 24px;
+    }
+}
+
+/* Di base (Desktop >= 1000px): mostra la mappa desktop e nascondi quella mobile */
+.map-desktop {
+    display: block;
+}
+.map-mobile {
+    display: none;
+}
+
+/* Sotto i 1000px (Schermi stretti <= 999px) */
+@media screen and (max-width: 999px) {
+    .map-desktop {
+        display: none; 
+    }
+    .map-mobile {
+        display: block;
+    }
+
+    /* Inversione dell'ordine: l'immagine va sopra e il testo sotto nei blocchi Sitemap e Assets */
+    .sitemap-content-grid,
+    .assets-content-grid {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 /* ==========================================================================
@@ -1025,9 +1050,9 @@ body {
 
 .assets-image {
     width: 100%;
-    height: auto;          /* Permette all'altezza di adattarsi proporzionalmente */
+    height: auto;          
     display: block;
-    object-fit: contain;   /* Evita qualsiasi ritaglio o deformazione dell'immagine */
+    object-fit: contain;   
 }
 
 /* Responsive */
@@ -1041,8 +1066,8 @@ body {
         border-bottom: 1px solid #222222;
     }
     .assets-image-col {
-        height: auto;       /* Rimuove l'altezza fissa di 350px per adattarsi alle proporzioni */
-        padding: 24px;      /* Aggiunge un piccolo respiro sui lati per schermi stretti */
+        height: auto;       
+        padding: 24px;     
     }
 }
 /* ==========================================================================
@@ -1237,7 +1262,7 @@ details:not([open]) .accordion-icon {
 .author-desc {
     font-size: 13px;
     line-height: 1.4;
-    color: #888888;
+    color: #595959;
     margin: 0;
 }
 
@@ -1395,7 +1420,8 @@ details:not([open]) .accordion-icon {
 
 /* Se la voce NON è selezionata, riduciamo l'opacità del titolo */
 .breakdownTabs-item:not(.is-selected) .breakdownTabs-title {
-    opacity: 0.45;
+    opacity: 1;
+    color: #595959;
 }
 
 .breakdownTabs-desc {
@@ -1590,7 +1616,7 @@ details:not([open]) .accordion-icon {
 
 .footer-copy {
     font-size: 12px;
-    color: #6e7681;
+    color: #8b949e;
     margin: 0;
 }
 
